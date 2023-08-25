@@ -1,0 +1,58 @@
+{% extends 'shoplist/base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block nav-content %}
+    <div class="container-fluid">
+        <h1 class="text-center" style="color: #22A699;">Operations</h1>
+    </div>
+    <button type="button" class="btn btn-outline-success me-2 w-100" data-bs-toggle="modal" data-bs-target="#addItemModal" data-bs-whatever="@mdo">Add New Item</button>
+    <button id="btn-update" class="btn btn-outline-success me-2 w-100" type="button">Update Item</button>
+    <button id="btn-delete" class="btn btn-outline-success me-2 w-100" type="button">Delete Item</button>
+    <button id="btn-mark-purchased" class="btn btn-outline-success me-2 w-100" type="button">Mark Purchased</button>
+    <a href="{% url 'purchased' %}" class="btn btn-outline-success me-2 w-100" type="button">View purchased and not purchased</a>
+{% endblock nav-content %}
+    
+
+{% block table %}
+    <table id="table-home" class="table table-striped table-dark" style="padding-top: 0.5em;">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">Quantity</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-shopping">
+            {% for item in items %}
+                <tr class="text-center" id="tr-{{item.id}}">
+                    <td id="number-{{item.id}}">{{item.number}}</td>
+                    <td id="name-{{item.id}}">{{item.name}}</td>
+                    <td id="desc-{{item.id}}">{{item.description}}</td>
+                    <td id="tdButton-{{item.id}}" class="tdButton">
+                        <button 
+                        type="button" 
+                        class="btn btn-success btn-purchased" 
+                        data-url="{% url 'item' item.id %}"
+                        data-item-id ="{{item.id}}">
+                            Mark Purchased
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock table %}
+    
+
+{% block scripts %}
+{% load static %}
+    <!-- DataTable -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+    <!-- Custom Script -->
+    <script src="{% static 'shoplist/js/home_script.js' %}"></script>
+{% endblock scripts %}
+    
