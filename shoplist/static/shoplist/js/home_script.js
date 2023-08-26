@@ -2,13 +2,6 @@
 
 $(document).ready( function () {
     $('#table-home').DataTable({
-        "bAutoWidth": false,
-        "aoColumns" : [
-            { sWidth: '20em' },
-            { sWidth: '20em' },
-            { sWidth: '20em' },
-            { sWidth: '20em' },
-        ],
         "language": {
             "lengthMenu": "Show _MENU_ records per page",
             "zeroRecords": "No records to display",

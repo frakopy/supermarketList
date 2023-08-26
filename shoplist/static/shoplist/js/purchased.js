@@ -89,14 +89,6 @@ tbody.addEventListener("click", (e) => {
 
 $(document).ready( function () {
     $('#table-purchased').DataTable({
-        "bAutoWidth": false,
-        "aoColumns" : [
-            { sWidth: '10em' },
-            { sWidth: '10em' },
-            { sWidth: '10em' },
-            { sWidth: '10em' },
-            { sWidth: '10em' },
-        ],
         "language": {
             "lengthMenu": "Show _MENU_ records per page",
             "zeroRecords": "No records to display",
