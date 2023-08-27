@@ -22,9 +22,9 @@ Create a file named .env in the project root directory. This file will hold your
 3. Set Environment Variables:
 Add the following environment variables to your .env file:
 
-`SECRET_KEY=your_secret_key`     
-`DEBUG=True  # Set to False in production`     
-`DATABASE_NAME=your_database_name`      
+`SECRET_KEY=your_secret_key`  
+`DEBUG=True  # Set to False in production`  
+`DATABASE_NAME=your_database_name`  
 
 Replace your_secret_key with your Django secret key and your_database_name with the desired name for your database.
 
