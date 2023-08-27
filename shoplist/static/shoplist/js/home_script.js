@@ -80,7 +80,8 @@ const updateItem = async (url, purchased, name, description, number, rows) => {
                 bootstrapAlert.classList.add('hide')
             }, 3000);
             // Reload the page if ther is not more rows to show
-            if(rows === 0) {location.reload()}
+            // if(rows === 0) {location.reload()}
+            location.reload()
         }else{
             bootstrapAlert.classList.remove('hide')
             bootstrapAlert.classList.remove('alert-success')
@@ -219,6 +220,8 @@ tbody.addEventListener("click", (e) => {
 
 
     }else if(e.target.classList.contains("btn-update")){
+        
+        // Fill the form from the modal window after clicking the update button
         let url = e.target.dataset.url
         trParentForUpdate = e.target.parentNode.parentNode
         let id = url.split("/")[2]
@@ -340,12 +343,12 @@ ModalbtnUpdate.addEventListener('click', () => {
     const purchased = false
     const url = `api/item/${id}`
 
-    // Change the contents of each element
-    if (name && description) {
-        tdName.textContent = name
-        tdDescription.textContent = description
-        tdNumber.textContent = number
-    }
+    // // Change the contents of each element
+    // if (name && description) {
+    //     tdName.textContent = name
+    //     tdDescription.textContent = description
+    //     tdNumber.textContent = number
+    // }
 
     //close modal window
     btnCloseUpdateModal.click() 

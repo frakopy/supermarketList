@@ -23,14 +23,14 @@ function getCookie(name) {
 }
 
 // Function to update the Item in the DB
-const updateItem = async (url, purchased, name, description) => {
+const updateItem = async (url, purchased) => {
     //Get the CSRF token using the function code provided by django documentation
     const csrftoken = getCookie('csrftoken'); 
 
     const fetchSettings = {
         method : 'PUT',
         credentials: 'same-origin',
-        body: JSON.stringify({ purchased: purchased, name: name, description: description}),
+        body: JSON.stringify({ purchased: purchased}),
         headers: {'Content-Type': 'application/json','X-CSRFToken': csrftoken},
     }
 
@@ -69,13 +69,11 @@ tbody.addEventListener("click", (e) => {
     if(e.target.classList.contains("btn-purchased")){
         const url = e.target.dataset.url
         const id = e.target.dataset.itemId
-        const parentTr = e.target.parentNode.parentNode
-        const name = parentTr.querySelector(`#name-${id}`).textContent
-        const description = parentTr.querySelector(`#desc-${id}`).textContent
+        const parentTr = document.getElementById(`tr-${id}`)
         const purchased = parentTr.querySelector(`#purchased-${id}`)
         let purchasedVal = purchased.dataset.purchasedValue === "True" ? "False" : "True"
         purchased.textContent = purchasedVal === "True" ? "Purchased" : "No Purchased"
-        updateItem(url, purchasedVal, name, description).then((result) => {
+        updateItem(url, purchasedVal).then((result) => {
             purchased.dataset.purchasedValue = result.purchased ? "True" : "False"
         })
 
