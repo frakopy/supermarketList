@@ -90,7 +90,7 @@ tbody.addEventListener("click", (e) => {
 $(document).ready( function () {
     $('#table-purchased').DataTable({
         "language": {
-            "lengthMenu": "Show _MENU_ records per page",
+            "lengthMenu": "",
             "zeroRecords": "No records to display",
             "info": "Displaying page _PAGE_ from _PAGES_",
             "infoEmpty": "No records available",

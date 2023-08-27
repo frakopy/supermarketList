@@ -1,9 +1,10 @@
 //---------------------- Data Table configuration ----------------------------------------------------
+let dataTable
 
 $(document).ready( function () {
-    $('#table-home').DataTable({
+    dataTable = $('#table-home').DataTable({
         "language": {
-            "lengthMenu": "Show _MENU_ records per page",
+            "lengthMenu": "",
             "zeroRecords": "No records to display",
             "info": "Displaying page _PAGE_ from _PAGES_",
             "infoEmpty": "No records available",
@@ -20,9 +21,9 @@ $(document).ready( function () {
 });
 
 
-
 // ----------------------- Getting html elements -------------------------------------------------
 
+const btnMenu = document.getElementById("btn-menu")
 const btnAdd = document.getElementById("btnCreateItem")
 const btnPurchasedSat = document.getElementById("purchased-satus")
 const ModalbtnUpdate = document.getElementById("ModalbtnUpdateItem")
@@ -258,6 +259,7 @@ btnMarkPurchased.addEventListener("click", () => { location.reload() })
 
 
 btnUpdate.addEventListener("click", () => {
+    if (window.innerWidth <= 767){btnMenu.click()}
     const btnsTd = Array.from(tdBtns)
     btnsTd.forEach(element => {
         let id = Number(element.getAttribute("id").split("-")[1])
@@ -277,6 +279,7 @@ btnUpdate.addEventListener("click", () => {
 })
 
 btnDelete.addEventListener("click", () => {
+    if (window.innerWidth <= 767){btnMenu.click()}
     addNewBtn("Click to delete", "btn-delete")
 })
 
@@ -291,29 +294,34 @@ btnAdd.addEventListener("click", (e) => {
     // Call the function to create the item in the db
     createItem(url,data).then(result => {
         if(result) {
-            const newTr = document.createElement("tr")
-            newTr.classList.add("text-center")
-            newTr.innerHTML = `
-            <tr>
+            dataTable.row.add($(`
+            <tr class="text-center odd" id="tr-${result.id}">
+                <td class="d-none" id="${result.id}">${result.id}</td>
                 <td id="number-${result.id}">${result.number}</td>
                 <td id="name-${result.id}">${result.name}</td>
                 <td id="desc-${result.id}">${result.description}</td>
                 <td id="tdButton-${result.id}" class="tdButton">
                     <button 
                     type="button" 
-                    class="btn btn-success btn-purchased" 
-                    data-url="/api/item/${result.id}">
-                        Mark Purchased
+                    class="btn btn-success btn-purchased home-purchased" 
+                    data-url="/api/item/${result.id}"
+                    data-item-id="${result.id}">
                     </button>
                 </td>
             </tr>
-            ` 
-            // Adding the new element to the table
-            tbody.prepend(newTr)
+            `));
+
+            // Set up the sorting order for the first column in ascending order
+            dataTable.order([0, 'desc']).draw();
+
         }
 
         //close modal window
         btnCloseModal.click()
+
+        // Close the operations menu
+        if (window.innerWidth <= 767){btnMenu.click()}
+
     })
 })
 

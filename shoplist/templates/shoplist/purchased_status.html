@@ -2,14 +2,6 @@
 
 {% block title %}Purchased-Page{% endblock title %}
 
-{% block css-scripts %}
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- DataTable -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
-{% endblock css-scripts %}
-
 {% block nav-content %}
     <div class="container-fluid">
         <h3 class="text-center" style="color: #22A699;">Click below to come back</h3>
@@ -21,14 +13,18 @@
 
 
 {% block table %}
-    <table id="table-purchased" class="table table-striped table-dark" style="padding-top: 0.5em;">
+    <table 
+    id="table-purchased" 
+    class="table table-striped table-dark display responsive nowrap"
+    width="100%"
+    style="padding-top: 0.5em;">
         <thead>
             <tr class="text-center">
-                <th scope="col">Quantity</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
+                <th class="text-center" data-priority="4" scope="col">Quantity</th>
+                <th class="text-center" data-priority="1" scope="col">Name</th>
+                <th class="text-center" data-priority="5" scope="col">Description</th>
+                <th class="text-center" data-priority="2" scope="col">Status</th>
+                <th class="text-center" data-priority="3" scope="col">Action</th>
             </tr>
         </thead>
         <tbody id="tbody-shopping">
@@ -37,7 +33,10 @@
                     <td id="number-{{item.id}}">{{item.number}}</td>
                     <td id="name-{{item.id}}">{{item.name}}</td>
                     <td id="desc-{{item.id}}">{{item.description}}</td>
-                    <td id="purchased-{{item.id}}" data-purchased-value="{{item.purchased}}">
+                    <td 
+                    id="purchased-{{item.id}}" 
+                    data-purchased-value="{{item.purchased}}" 
+                    style="white-space: normal; word-wrap: break-word;">
                         {% if item.purchased %}
                             Purchased
                         {% else %}
@@ -60,13 +59,8 @@
 {% endblock table %}
 
 
-{% block scripts %}
+{% block custom-scripts %}
 {% load static %}
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- DataTable -->
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
     <!-- Custom Script -->
     <script src="{% static 'shoplist/js/purchased.js' %}"></script>
-{% endblock scripts %}
+{% endblock custom-scripts %}
