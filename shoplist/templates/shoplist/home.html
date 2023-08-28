@@ -11,6 +11,8 @@
     <button id="btn-delete" class="btn btn-outline-success me-2 w-100" type="button">Delete Item</button>
     <button id="btn-mark-purchased" class="btn btn-outline-success me-2 w-100" type="button">Mark Purchased</button>
     <a href="{% url 'purchased' %}" class="btn btn-outline-success me-2 w-100" type="button">View purchased and not purchased</a>
+    <button id="btn-reset" onclick="reload()" class="btn btn-outline-success me-2 w-100" type="button">Reset</button>
+
 {% endblock nav-content %}
 
 
@@ -22,7 +24,7 @@
     style="padding-top: 0.5em;">
         <thead>
             <tr>
-                <th class="text-center d-none" data-priority="5" scope="col">Order</th>
+                <th class="text-center " data-priority="5" scope="col">Order</th>
                 <th class="text-center" data-priority="3" scope="col">Quantity</th>
                 <th class="text-center" data-priority="1" scope="col">Name</th>
                 <th class="text-center" data-priority="4" scope="col">Description</th>
@@ -32,7 +34,7 @@
         <tbody id="tbody-shopping">
             {% for item in items %}
                 <tr class="text-center" id="tr-{{item.id}}">
-                    <td class="d-none" id="{{item.id}}">{{item.id}}</td>
+                    <td class="" id="{{item.id}}">{{item.id}}</td>
                     <td id="number-{{item.id}}">{{item.number}}</td>
                     <td id="name-{{item.id}}">{{item.name}}</td>
                     <td id="desc-{{item.id}}">{{item.description}}</td>
@@ -55,5 +57,8 @@
 {% load static %}
     <!-- Custom Script -->
     <script src="{% static 'shoplist/js/home_script.js' %}"></script>
+    <script>
+        const reload = () => { location.reload() };
+    </script>
 {% endblock custom-scripts %}
     

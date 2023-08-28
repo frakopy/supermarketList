@@ -17,12 +17,14 @@ $(document).ready( function () {
                 "previous": "Previous"
             },
         },
+        "order": [[0, "desc"]],
     });
 });
 
 
 // ----------------------- Getting html elements -------------------------------------------------
 
+const btnReset = document.getElementById("btn-reset")
 const btnMenu = document.getElementById("btn-menu")
 const btnAdd = document.getElementById("btnCreateItem")
 const btnPurchasedSat = document.getElementById("purchased-satus")
@@ -246,7 +248,7 @@ const addNewBtn = (text, className) => {
         element.innerHTML = `
         <button 
         type="button" 
-        class="btn btn-success ${className}"
+        class="btn ${className}"
         data-url="api/item/${id}"
         >
             ${text}
@@ -254,6 +256,9 @@ const addNewBtn = (text, className) => {
         `
     });
 }
+
+
+// btnReset.addEventListener("click", () =>{ })
 
 //---------------- Adding listeners to change buttons -------------------------------
 
@@ -269,7 +274,7 @@ btnUpdate.addEventListener("click", () => {
         element.innerHTML = `
         <button 
         type="button" 
-        class="btn btn-success btn-update"
+        class="btn btn-primary btn-update"
         data-bs-toggle="modal" 
         data-bs-target="#updateItemModal" 
         data-bs-whatever="@mdo"
@@ -283,7 +288,7 @@ btnUpdate.addEventListener("click", () => {
 
 btnDelete.addEventListener("click", () => {
     if (window.innerWidth <= 767){btnMenu.click()}
-    addNewBtn("Click to delete", "btn-delete")
+    addNewBtn("Click to delete", "btn-delete btn-danger")
 })
 
 //------------------------- Adding listener to create new Item ----------------------------
@@ -299,7 +304,7 @@ btnAdd.addEventListener("click", (e) => {
         if(result) {
             dataTable.row.add($(`
             <tr class="text-center odd" id="tr-${result.id}">
-                <td class="d-none" id="${result.id}">${result.id}</td>
+                <td class="" id="${result.id}">${result.id}</td>
                 <td id="number-${result.id}">${result.number}</td>
                 <td id="name-${result.id}">${result.name}</td>
                 <td id="desc-${result.id}">${result.description}</td>
@@ -342,13 +347,6 @@ ModalbtnUpdate.addEventListener('click', () => {
     const number = document.getElementById("update-item-quantity").value
     const purchased = false
     const url = `api/item/${id}`
-
-    // // Change the contents of each element
-    // if (name && description) {
-    //     tdName.textContent = name
-    //     tdDescription.textContent = description
-    //     tdNumber.textContent = number
-    // }
 
     //close modal window
     btnCloseUpdateModal.click() 
