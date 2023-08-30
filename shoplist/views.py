@@ -1,7 +1,15 @@
 from django.views.generic.base import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Item
 
-class HomePageView(TemplateView):
+
+class LoginPageView(TemplateView):
+    template_name = "shoplist/login.html"
+
+
+class HomePageView(LoginRequiredMixin, TemplateView):
+    login_url = "/"
+
     template_name = "shoplist/home.html"
 
     def get_context_data(self, **kwargs):
@@ -9,7 +17,9 @@ class HomePageView(TemplateView):
         context["items"] = Item.objects.filter(purchased=False).order_by("-id")
         return context
 
-class PurchasedView(TemplateView):
+class PurchasedView(LoginRequiredMixin, TemplateView):
+    login_url = "/"
+
     template_name = "shoplist/purchased_status.html"
 
     def get_context_data(self, **kwargs):

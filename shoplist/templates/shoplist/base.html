@@ -30,6 +30,11 @@
             font-size: 2.5em;
         }
 
+    .image-header>a{
+        position: absolute; 
+        right: 0;
+    }    
+
     .image-footer {
         background: linear-gradient(rgba(5, 7, 12, 0.10),
         rgba(5, 7, 12, 0.50)), url("{% static 'shoplist/img/footer_img.jpg' %}"); 
@@ -60,11 +65,16 @@
 
     .nav-title::before{content: "Operations";}
 
+    .navbar>div>form>.logout{
+            display: none;
+    }
+
 
     /* Media query */
     @media (max-width: 767px) {
 
         .image-header > span{font-size: 1.8em;}
+        .image-header>a{display: none;}    
 
         .alert{font-size: 0.6em;}
 
@@ -87,14 +97,23 @@
         .home-purchased::before{content: "Shop";}
 
         .nav-title::before{content: "";}
+
+        .navbar>div>form>.logout{
+            display: block;
+        }
     }
 
 </style>
 <body>
-    <div class="container-fluid image-header text-center">
+    <div class="container-fluid image-header text-center d-flex justify-content-center flex-wrap">
         <span style="color: white; font-weight: bold; letter-spacing: 0.1em;">
             Supermarket shopping list
         </span>
+        <a 
+        href="{% url 'account_logout' %}" 
+        style="text-decoration: none; color: white;">
+            <i style="font-size: 2em;" class="bi bi-box-arrow-left p-3"> Logout </i>
+        </a>
     </div>
     
     <div id="bootstrap-alert" class="alert alert-success alert-dismissible fade show text-center container hide" role="alert">
