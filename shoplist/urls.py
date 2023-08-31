@@ -3,7 +3,7 @@ from .views import HomePageView, PurchasedView, LoginPageView
 
 
 urlpatterns = [
-    path('', LoginPageView.as_view(), name='login'),
-    path('home/', HomePageView.as_view(), name='home'),
+    path('', HomePageView.as_view(), name='home'),
+    path('login/', LoginPageView.as_view(), name='login'),
     path('purchased/', PurchasedView.as_view(), name='purchased'),
 ]

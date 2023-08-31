@@ -216,7 +216,6 @@ tbody.addEventListener("click", (e) => {
         tbody.removeChild(trParentForUpdate)
         
         const rows = tbody.querySelectorAll("tr").length
-
         // Call the function to remove the item in the db
         deleteItem(url, rows)
 
