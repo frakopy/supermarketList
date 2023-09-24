@@ -142,9 +142,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Origins and Trusted
-CORS_ALLOWED_ORIGINS = [""]
+CORS_ALLOWED_ORIGINS = ["https://www.supermarketlist.fracodev.click"]
 
-CSRF_TRUSTED_ORIGINS = [""]
+CSRF_TRUSTED_ORIGINS = ["https://www.supermarketlist.fracodev.click"]
 
 # Auth redirects
 LOGIN_REDIRECT_URL = 'home'
